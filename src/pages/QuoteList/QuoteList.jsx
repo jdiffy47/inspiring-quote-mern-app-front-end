@@ -1,4 +1,7 @@
 import styles from './QuoteList.module.css'
+import QuoteCard from '../../components/QuoteCard/QuoteCard'
+
+const imgIds = [1000, 100, 1002, 1004]
 
 function QuoteList(props) {
   return (
@@ -6,10 +9,7 @@ function QuoteList(props) {
       <h1>Quote List</h1>
       <div className={styles.container}>
         {props.quotes.map(quote =>
-          <div key={quote._id}>
-            <p>Quote Name: {quote.quote}</p>
-            <p>Breed: {quote.author}</p>
-          </div>
+          <QuoteCard key={quote._id} quote={quote} randImgId={imgIds[Math.floor(Math.random() * (imgIds.length))]} />         
         )}
       </div>
     </>
