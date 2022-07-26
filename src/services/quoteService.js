@@ -55,5 +55,6 @@ export {
   create,
   getAll,
   deleteOne,
-  update
+  update,
+  addPhoto
 }

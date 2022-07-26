@@ -45,11 +45,14 @@ const App = () => {
 
   const handleDeleteQuote = async id => {
     const deletedQuote = await quoteService.deleteOne(id)
-    setQuotes(quotes.filter(quote => quote._id !== id))
+    setQuotes(quotes.filter(quote => quote._id !== deletedQuote._id))
   }
 
-  const handleUpdateQuote = async updatedQuoteData => {
+  const handleUpdateQuote = async (updatedQuoteData, photo) => {
     const updatedQuote = await quoteService.update(updatedQuoteData)
+    if (photo) {
+      updatedQuote.photo = await quotePhotoHelper(photo, updatedQuote._id)
+    }
     const newQuoteArray = quotes.map(quote => 
       quote._id === updatedQuote._id ? updatedQuote : quote
       )

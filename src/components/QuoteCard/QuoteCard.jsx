@@ -5,9 +5,14 @@ function QuoteCard({ quote, randImgId, handleDeleteQuote, user }) {
   return (
     <div className="card">
       <img
-        src={`https://picsum.photos/id/${randImgId}/640/480`}
-        alt="Emotional background"
+        src={
+          quote.photo
+            ? quote.photo
+            : `https://picsum.photos/id/${randImgId}/640/480`
+        }
+        alt="A happy quote"
         className="card-img-top"
+        style={{ width: "640px" }}
       />
       <div className="card-body">
         <h2 className="card-text">{quote.quote}</h2>

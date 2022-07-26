@@ -4,18 +4,21 @@ import { Link, useLocation } from 'react-router-dom'
 function EditQuote(props) {
   const location = useLocation()
   const formElement = useRef()
-  
+  const [validForm, setValidForm] = useState(true)
   const [formData, setFormData] = useState(location.state.quote)
-
+  const [photoData, setPhotoData] = useState({})
+  
   const handleChange = evt => {
     setFormData({...formData, [evt.target.name]: evt.target.value})
   }
 
-  const [validForm, setValidForm] = useState(true)
+  const handleChangePhoto = (evt) => {
+    setPhotoData({ photo: evt.target.files[0] })
+  }
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    props.handleUpdateQuote(formData)
+    props.handleUpdateQuote(formData, photoData.photo)
   }
 
   useEffect(() => {
@@ -52,6 +55,18 @@ function EditQuote(props) {
             value={formData.author}
             onChange={handleChange}
             required
+          />
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="photo-upload" className="form-label">
+            {formData.photo ? "Replace existing photo" : "Add Photo"}
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="photo-upload"
+            name="photo"
+            onChange={handleChangePhoto}
           />
         </div>
         <div className="d-grid">
