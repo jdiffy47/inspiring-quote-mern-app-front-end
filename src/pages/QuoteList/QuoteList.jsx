@@ -14,6 +14,7 @@ function QuoteList(props) {
             quote={quote} 
             randImgId={imgIds[Math.floor(Math.random() * (imgIds.length))]} 
             handleDeleteQuote={props.handleDeleteQuote}
+            user={props.user}
           />         
         )}
       </div>

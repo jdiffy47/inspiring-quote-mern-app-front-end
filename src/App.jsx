@@ -33,6 +33,7 @@ const App = () => {
   }
 
   const handleDeleteQuote = id => {
+    const deletedQuote = await quoteService.deleteOne(id)
     setQuotes(quotes.filter(quote => quote._id !== id))
   }
 
@@ -60,7 +61,7 @@ const App = () => {
               />
               <Route
                 path="/"
-                element={<QuoteList quotes={quotes} handleDeleteQuote={handleDeleteQuote} />}
+                element={<QuoteList quotes={quotes} handleDeleteQuote={handleDeleteQuote} user={user} />}
               />
               <Route
                 path="/add"
