@@ -40,6 +40,17 @@ async function update(quote) {
   return res.json()
 }
 
+async function addPhoto(photoData, quoteId) {
+  const res = await fetch(`${BASE_URL}/${quoteId}/add-photo`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: photoData
+  })
+  return await res.json()
+}
+
 export {
   create,
   getAll,

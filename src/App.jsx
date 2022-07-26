@@ -28,10 +28,19 @@ const App = () => {
 
   const [quotes, setQuotes] = useState([])
 
-  const handleAddQuote = async newQuoteData => {
+  const handleAddQuote = async (newQuoteData, photo) => {
     const newQuote = await quoteService.create(newQuoteData)
+    if (photo) {
+      newQuote.photo = await quotePhotoHelper(photo, newQuote._id)
+    }
     setQuotes([...quotes, newQuote])
     navigate('/')
+  }
+
+  const quotePhotoHelper = async (photo, id) => {
+    const photoData = new FormData()
+    photoData.append('photo', photo)
+    return await quoteService.addPhoto(photoData, id)
   }
 
   const handleDeleteQuote = async id => {

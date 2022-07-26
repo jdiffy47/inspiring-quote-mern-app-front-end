@@ -6,6 +6,8 @@ function AddQuote(props) {
     author: ''
   })
 
+  const [photoData, setPhotoData] = useState({})
+
   const handleChange = evt => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
@@ -20,7 +22,11 @@ function AddQuote(props) {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    props.handleAddQuote(formData)
+    props.handleAddQuote(formData, photoData.photo)
+  }
+
+  const handleChangePhoto = evt => {
+    setPhotoData({ photo: evt.target.files[0] })
   }
 
   return (
@@ -53,6 +59,18 @@ function AddQuote(props) {
             value={formData.author}
             onChange={handleChange}
             required
+          />
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="photo-upload" className="form-label">
+            Upload Photo
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="photo-upload"
+            name="photo"
+            onChange={handleChangePhoto}
           />
         </div>
         <div className="d-grid">
