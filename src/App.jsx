@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import Signup from './pages/Signup/Signup'
@@ -8,6 +8,8 @@ import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
 import AddQuote from './pages/AddQuote/AddQuote'
+import QuoteList from './pages/QuoteList/QuoteList'
+import * as quoteService from './services/quoteService'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
@@ -25,9 +27,18 @@ const App = () => {
 
   const [quotes, setQuotes] = useState([])
 
-  const handleAddQuote = newQuoteData => {
+  const handleAddQuote = async newQuoteData => {
+    const newQuote = await quoteService.create(newQuoteData)
     setQuotes([...quotes, newQuoteData])
   }
+
+  useEffect(() => {
+    const fetchAllQuotes = async () => {
+      const quoteData = await quoteService.getAll()
+      setQuotes(quoteData)
+    }
+    fetchAllQuotes()
+  }, [])
 
   return (
       <>
@@ -42,6 +53,10 @@ const App = () => {
               <Route
                 path="/login"
                 element={<Login handleSignupOrLogin={handleSignupOrLogin} />}
+              />
+              <Route
+                path="/"
+                element={<QuoteList quotes={quotes} />}
               />
               <Route
                 path="/add"
