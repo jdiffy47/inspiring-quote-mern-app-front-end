@@ -13,6 +13,11 @@ function EditQuote(props) {
 
   const [validForm, setValidForm] = useState(true)
 
+  const handleSubmit = evt => {
+    evt.preventDefault()
+    props.handleUpdateQuote(formData)
+  }
+
   useEffect(() => {
     formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
   }, [formData] )
@@ -20,7 +25,7 @@ function EditQuote(props) {
   return (
     <>
       <h1>Edit Quote</h1>
-      <form autoComplete="off" ref={formElement}>
+      <form autoComplete="off" ref={formElement} onSubmit={handleSubmit}>
         <div className="form-group mb-3">
           <label htmlFor="quote-input" className="form-label">
             Quote (required)

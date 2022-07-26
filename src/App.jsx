@@ -39,6 +39,15 @@ const App = () => {
     setQuotes(quotes.filter(quote => quote._id !== id))
   }
 
+  const handleUpdateQuote = async updatedQuoteData => {
+    const updatedQuote = await quoteService.update(updatedQuoteData)
+    const newQuoteArray = quotes.map(quote => 
+      quote._id === updatedQuote._id ? updatedQuote : quote
+      )
+      setQuotes(newQuoteArray)
+      navigate('/')
+  }
+
   useEffect(() => {
     const fetchAllQuotes = async () => {
       const quoteData = await quoteService.getAll()
@@ -71,7 +80,7 @@ const App = () => {
               />
               <Route
                 path="/edit"
-                element={<EditQuote />}
+                element={<EditQuote handleUpdateQuote={handleUpdateQuote} />}
               />
               <Route
                 path="/profiles"

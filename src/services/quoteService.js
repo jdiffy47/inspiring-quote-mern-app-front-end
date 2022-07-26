@@ -28,8 +28,21 @@ async function deleteOne(id) {
   return res.json()
 }
 
+async function update(quote) {
+  const res = await fetch(`${BASE_URL}/${quote._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: JSON.stringify(quote)
+  })
+  return res.json()
+}
+
 export {
   create,
   getAll,
-  deleteOne
+  deleteOne,
+  update
 }
