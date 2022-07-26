@@ -15,6 +15,13 @@ function QuoteCard({ quote, randImgId, handleDeleteQuote, user }) {
       </div>
         {user?.profile === quote.owner._id &&
           <div className="card-footer">
+            <Link
+              className="btn btn-sm btn-warning"
+              to="/edit"
+              state={{quote}}
+            >
+              Edit
+            </Link>
             <button 
               className="btn btn-sm btn-danger m-left"
               onClick={() => handleDeleteQuote(quote._id)}
