@@ -23,6 +23,12 @@ const App = () => {
     setUser(authService.getUser())
   }
 
+  const [quotes, setQuotes] = useState([])
+
+  const handleAddQuote = newQuoteData => {
+    setQuotes([...quotes, newQuoteData])
+  }
+
   return (
       <>
         <div className="App">
@@ -39,7 +45,7 @@ const App = () => {
               />
               <Route
                 path="/add"
-                element={<AddQuote />}
+                element={<AddQuote handleAddQuote={handleAddQuote} />}
               />
               <Route
                 path="/profiles"
