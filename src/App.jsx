@@ -32,6 +32,10 @@ const App = () => {
     setQuotes([...quotes, newQuoteData])
   }
 
+  const handleDeleteQuote = id => {
+    setQuotes(quotes.filter(quote => quote._id !== id))
+  }
+
   useEffect(() => {
     const fetchAllQuotes = async () => {
       const quoteData = await quoteService.getAll()
@@ -56,7 +60,7 @@ const App = () => {
               />
               <Route
                 path="/"
-                element={<QuoteList quotes={quotes} />}
+                element={<QuoteList quotes={quotes} handleDeleteQuote={handleDeleteQuote} />}
               />
               <Route
                 path="/add"

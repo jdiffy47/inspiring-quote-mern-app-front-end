@@ -9,7 +9,12 @@ function QuoteList(props) {
       <h1>Quote List</h1>
       <div className={styles.container}>
         {props.quotes.map(quote =>
-          <QuoteCard key={quote._id} quote={quote} randImgId={imgIds[Math.floor(Math.random() * (imgIds.length))]} />         
+          <QuoteCard 
+            key={quote._id} 
+            quote={quote} 
+            randImgId={imgIds[Math.floor(Math.random() * (imgIds.length))]} 
+            handleDeleteQuote={props.handleDeleteQuote}
+          />         
         )}
       </div>
     </>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 
-function QuoteCard({ quote, randImgId }) {
+function QuoteCard({ quote, randImgId, handleDeleteQuote }) {
   return (
     <div className="card">
       <img
@@ -12,6 +12,14 @@ function QuoteCard({ quote, randImgId }) {
       <div className="card-body">
         <h2 className="card-text">{quote.quote}</h2>
         <p className="card-text">By {quote.author}</p>
+      </div>
+      <div className="card-footer">
+        <button 
+          className="btn btn-sm btn-danger m-left"
+          onClick={() => handleDeleteQuote(quote._id)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   )
