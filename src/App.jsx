@@ -9,6 +9,7 @@ import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
 import AddQuote from './pages/AddQuote/AddQuote'
 import QuoteList from './pages/QuoteList/QuoteList'
+import EditQuote from './pages/EditQuote/EditQuote'
 import * as quoteService from './services/quoteService'
 
 const App = () => {
@@ -29,10 +30,11 @@ const App = () => {
 
   const handleAddQuote = async newQuoteData => {
     const newQuote = await quoteService.create(newQuoteData)
-    setQuotes([...quotes, newQuoteData])
+    setQuotes([...quotes, newQuote])
+    navigate('/')
   }
 
-  const handleDeleteQuote = id => {
+  const handleDeleteQuote = async id => {
     const deletedQuote = await quoteService.deleteOne(id)
     setQuotes(quotes.filter(quote => quote._id !== id))
   }
@@ -66,6 +68,10 @@ const App = () => {
               <Route
                 path="/add"
                 element={<AddQuote handleAddQuote={handleAddQuote} />}
+              />
+              <Route
+                path="/edit"
+                element={<EditQuote />}
               />
               <Route
                 path="/profiles"
