@@ -6,7 +6,7 @@ function QuoteCard({ quote, randImgId, handleDeleteQuote, user }) {
     <div className="card">
       <img
         src={
-          quote.photo
+            quote.photo
             ? quote.photo
             : `https://picsum.photos/id/${randImgId}/640/480`
         }
