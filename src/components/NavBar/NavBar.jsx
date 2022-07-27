@@ -19,6 +19,9 @@ const NavBar = ({ user, handleLogout }) => {
       :
         <nav>
           <ul>
+              <Link to="/">Quotes</Link>
+              <Link to="/add">Add a Quote</Link>
+              <Link to="/profiles">Profiles</Link>
             <li><Link to="/login">Log In</Link></li>
             <li><Link to="/signup">Sign Up</Link></li>
           </ul>
